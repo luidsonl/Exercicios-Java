@@ -1,0 +1,107 @@
+package uninter;
+
+import java.util.Scanner;
+
+
+public class Principal {
+	static Moeda moeda;
+
+	public static void main(String[] args) {
+		
+		Cofrinho cofrinho = new Cofrinho(); // Cria o cofrinho
+		Scanner teclado = new Scanner(System.in); // Implementa a função de capturar teclado
+		
+		
+		int opcao; // Armazena a opção selecionada
+		int tipoMoeda; // Armazena o tipo de moeda selecionada
+		double valorMoeda; // Armazena o valor da moeda
+		int idSelecionado; // Armazena o id da moeda desejada
+		
+		// Uso do try para buscar por erros
+		try {
+		
+			// Exibe um menu na tela do usuário
+			System.out.println("Cofrinho de moedas - Luidson lima Santos - 4135933");
+			System.out.println("Escolha uma das opções:");
+			System.out.println("1 -- Adicionar moedas de diferentes valores e países em seu cofrinho");
+			System.out.println("2 -- Remover moedas específicas do cofrinho");
+			System.out.println("3 -- Listar todas as moedas que estão dentro do cofrinho");
+			System.out.println("4 -- Calcular quanto dinheiro existe no cofrinho convertido para Real");
+			System.out.println("0 -- Encerrar programa");
+			
+			
+			opcao = teclado.nextInt(); // Recebe a opção desejada
+			System.out.println("");
+			
+			
+			while(opcao != 0) { // Cria o loop que exibe o menu
+				
+				// switch case para tratar a opção informada
+				switch(opcao) {
+				case 1:
+					System.out.println("Informe a moeda que deseja inserir:");
+					System.out.println("Insira 1 para Real");
+					System.out.println("Insira 2 para Dolar");
+					System.out.println("Insira 3 para Euro");
+					
+					//Recebe a opção desejada
+					tipoMoeda = teclado.nextInt();
+					
+					//Cria um loop enquanto a opção for inválida
+					while (tipoMoeda < 1 || tipoMoeda > 3) {
+						System.out.println("Opção inválida! Tente novamente");
+						tipoMoeda = teclado.nextInt();
+						}
+					
+					System.out.println("Agora informe o valor da moeda(separe usando ','):");
+					valorMoeda = teclado.nextDouble();// atribui o valor informado a variável valorMoeda
+					cofrinho.adicionarMoeda(valorMoeda, tipoMoeda);// adiciona moeda ao cofrinho
+					break; 
+	
+				case 2:
+					System.out.println("Informe o id da moeda que deseja excluir:");
+					idSelecionado = teclado.nextInt();// atribui o valor informado a variável idSelecionado
+					cofrinho.removerMoeda(idSelecionado);// Chama o método removerMoeda com o idSelecionado
+					
+					break;
+				case 3:
+					System.out.println("Exibindo moedas no cofrinho:");
+					cofrinho.listarMoedas();//Chama o método listarMoedas
+					
+					break;
+				case 4: 
+					System.out.println("Exibindo falor total em reais:");
+					cofrinho.totalEmReal(); //Chama o método totalEmReais
+					break;
+				default:
+					System.out.println("Opção inválida! Tente novamente..."); //Informa que a opção é inválida
+					break;
+					
+				}
+				
+				// Exibe novamento o menu
+				System.out.println("Escolha uma das opções:");
+				System.out.println("1 -- Adicionar moedas de diferentes valores e países em seu cofrinho");
+				System.out.println("2 -- Remover moedas específicas do cofrinho");
+				System.out.println("3 -- Listar todas as moedas que estão dentro do cofrinho");
+				System.out.println("4 -- Calcular quanto dinheiro existe no cofrinho convertido para Real");
+				System.out.println("0 -- Encerrar programa");
+				
+				opcao = teclado.nextInt(); // Recebe a opção desejada
+				System.out.println("");
+			}
+		
+		teclado.close(); //Desliga a função de capturar o teclado
+		System.out.println("Programa encerrado...");
+		
+		}
+		
+		// Uso do catch para tratar erros encontrados
+		catch(Exception e){
+			System.out.println("O valor foi inserido no formato incorreto! Encerrando programa...");
+		}
+	
+		
+	}
+	
+}
